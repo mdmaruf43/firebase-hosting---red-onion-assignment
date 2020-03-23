@@ -1,41 +1,58 @@
 import React from 'react';
 import './FoodContent.css';
-import demoData from '../../demoData';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import FoodItem from '../FoodItem/FoodItem';
+import fakeData from '../../demoData';
+import { Link } from 'react-router-dom'; 
+import {addToDatabaseCart} from '../../utilities/databaseManager';
 
-const FoodContent = () => {
-const first6 = demoData.slice(0, 6);
-const [foods, setFoods] = useState(first6);
-const [matchFoodType, setMatchFoodType] = useState("");
-useEffect(() => {
-    setFoods(demoData);
-}, [])
-const matchFoods = foods.filter(food => food.category === matchFoodType);
-console.log(matchFoodType);
+const FoodContent = (props) => {
+    const [foods, setFoods] = useState([]);
+    const [selectedFoodType, setSelectedFoodType] = useState("lunch");
+    const [cart, setCart] = useState([]);
+    useEffect(() => {
+        setFoods(fakeData);
+    }, [])
+    const selectedFoods =  foods.filter(food => food.category === selectedFoodType).slice(0, 6)
+
+    const handleAddFood = (food) => {
+        const newCart = [...cart, food];
+        setCart(newCart);
+        const sameFood = newCart.filter(fd => fd.id === food.id);
+        const count = sameFood.length;
+        addToDatabaseCart(food.id, count);
+    }
     return (
         <div className="container">
             <nav>
-                <ul className="nav d-flex justify-content-center">
-                    <li onClick={() => setMatchFoodType("Breakfast")} className="nav-item">
-                        <span className={matchFoodType === "breakfast" ?  "active nav-link" : "nav-link"}>Breakfast</span>
+                <ul className="nav justify-content-center">
+                    <li onClick={() => setSelectedFoodType("breakfast")} className="nav-item">
+                        <Link  to="/" className={selectedFoodType === "breakfast" ?  "active nav-link" : "nav-link"}>Breakfast</Link>
                     </li>
-                    <li onClick={() => setMatchFoodType("Lunch")} className="nav-item">
-                        <span to="breakfast" className={matchFoodType === "lunch" ?  "active nav-link" : "nav-link"}>Lunch</span>
+                    <li onClick={() => setSelectedFoodType("lunch")} className="nav-item">
+                        <Link to="/" className={selectedFoodType === "lunch" ?  "active nav-link" : "nav-link"}>Lunch</Link>
                     </li>
-                    <li onClick={() => setMatchFoodType("Dinner")} className="nav-item">
-                        <span to="breakfast" className={matchFoodType === "dinner" ?  "active nav-link" : "nav-link"}>Dinner</span>
+                    <li onClick={() => setSelectedFoodType("dinner")} className="nav-item">
+                        <Link to="/" className={selectedFoodType === "dinner" ?  "active nav-link" : "nav-link"}>Dinner</Link>
                     </li>
                 </ul>
             </nav>
             <div className="row my-5">
                 {
-                    matchFoods.map(food => <FoodItem food={food}></FoodItem>)
+                    selectedFoods.map(food => <FoodItem key={food.id} handleAddFood={handleAddFood} cart={cart} food={food}></FoodItem>)
                 }
             </div>
             <div className="text-center">
-                <button disabled className="btn btn-secondary">Check Out Your Food</button>
+                {
+                    props.cart.length ? 
+                    <Link to="/checkout">
+                        <button  className="btn btn-danger btn-secondary">Check Out Your Food</button>
+                    </Link>
+                    :
+                    <button disabled className="btn btn-secondary">Check Out Your Food</button>
+
+                }
             </div>
         </div>
     );

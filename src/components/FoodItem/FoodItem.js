@@ -1,25 +1,22 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import './FoodItem.css';
-
 const FoodItem = (props) => {
-    const {id, name, title, price, img} = props.food;
+    const {name, price, image, title, id} = props.food;
+    console.log(props.food.id);
     return (
-        <div className="container">
-            <div className="col-md-4 mb-4">
-            <Link to={"food/"+id}>
+        <div className="col-md-4 mb-4">
+            <Link onClick={() => props.handleAddFood(props.food)} to={"/food/"+id}>
                 <div className="card text-center">
-                    <img src={img} alt="" className="card-img-top"/>
+                    <img src={image} alt="" className="img-fluid card-img-top"/>
                     <div className="card-body">
-                        <h5>{name}</h5>
+                        <h6>{name}</h6>
                         <p>{title}</p>
-                        <h4>${price}</h4>
+                        <h6>${price}</h6>
                     </div>
                 </div>
             </Link>
         </div>
-        </div>
     );
-}
+};
 
 export default FoodItem;
