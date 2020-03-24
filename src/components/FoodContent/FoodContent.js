@@ -13,16 +13,9 @@ const FoodContent = (props) => {
     const [cart, setCart] = useState([]);
     useEffect(() => {
         setFoods(fakeData);
+        setCart(fakeData);
     }, [])
     const selectedFoods =  foods.filter(food => food.category === selectedFoodType).slice(0, 6)
-
-    const handleAddFood = (food) => {
-        const newCart = [...cart, food];
-        setCart(newCart);
-        const sameFood = newCart.filter(fd => fd.id === food.id);
-        const count = sameFood.length;
-        addToDatabaseCart(food.id, count);
-    }
     return (
         <div className="container">
             <nav>
@@ -40,18 +33,17 @@ const FoodContent = (props) => {
             </nav>
             <div className="row my-5">
                 {
-                    selectedFoods.map(food => <FoodItem key={food.id} handleAddFood={handleAddFood} cart={cart} food={food}></FoodItem>)
+                    selectedFoods.map(food => <FoodItem key={food.id} handleFoodCart={props.handleFoodCart} food={food}></FoodItem>)
                 }
             </div>
             <div className="text-center">
                 {
-                    props.cart.length ? 
-                    <Link to="/checkout">
+                    props.cart.length ?
+                    <Link to="/">
                         <button  className="btn btn-danger btn-secondary">Check Out Your Food</button>
                     </Link>
                     :
                     <button disabled className="btn btn-secondary">Check Out Your Food</button>
-
                 }
             </div>
         </div>
