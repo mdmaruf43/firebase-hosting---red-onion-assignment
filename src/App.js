@@ -21,7 +21,6 @@ function App() {
         food.quantity = saveCart[id];
         return food;
     })
-    console.log(cardFoods);
     setCart(cardFoods);   
   }, [])
   const handleFoodCart = (food) => {

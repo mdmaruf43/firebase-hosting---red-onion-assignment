@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import FoodItem from '../FoodItem/FoodItem';
 import fakeData from '../../demoData';
 import { Link } from 'react-router-dom'; 
-import {addToDatabaseCart} from '../../utilities/databaseManager';
 
 const FoodContent = (props) => {
     const [foods, setFoods] = useState([]);

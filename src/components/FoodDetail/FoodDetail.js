@@ -1,18 +1,17 @@
-import React , { useState, useEffect } from 'react';
+import React , { useState } from 'react';
 import './FoodDetail.css';
 import fakeData from '../../demoData';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartArrowDown, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 const FoodDetail = (props) => {
     const {foodId} = useParams();
     const currentFood = fakeData.find(food => food.id === foodId);
-    const [cart, setCart] = useState([]);
+    //const [cart, setCart] = useState([]);
     const [quantity, setQuantity] = useState(1);
     // const total = props.cart.reduce((total, food) => total + Number(food.price) * food.quantity, 0)
     // console.log(total);
-    console.log(quantity);
 
     return (
         <div className="my-5 container">
