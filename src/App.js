@@ -10,6 +10,7 @@ import Footer from './components/Footer/Footer';
 import FoodDetail from './components/FoodDetail/FoodDetail';
 import fakeData from './demoData';
 import { getDatabaseCart, addToDatabaseCart } from './utilities/databaseManager';
+import { AuthContextProvider } from './components/Login/UseAuth';
 
 function App() {
   const [cart , setCart] = useState([]);
@@ -40,25 +41,30 @@ function App() {
     addToDatabaseCart(food.id, count);
   }
   return (
-      <Router>
-        <Header cart={cart}></Header>
-        <Switch>
-          <Route path="/login">
-            <Login></Login>
-          </Route>
-          <Route exact path="/">
-            <Banner></Banner>
-            <FoodContent handleFoodCart={handleFoodCart} cart={cart}></FoodContent>
-            <Footer></Footer>
-          </Route>
-          <Route path="/food/:foodId">
-            <FoodDetail cart={cart}></FoodDetail>
-          </Route>
-          <Route path="*">
-            <NotFound></NotFound>
-          </Route>
-        </Switch>
-      </Router>
+    <div>
+      <AuthContextProvider>
+        <Router>
+          <Switch>
+            <Route path="/login">
+              <Login></Login>
+            </Route>
+            <Route exact path="/">
+              <Header cart={cart}></Header>
+              <Banner></Banner>
+              <FoodContent handleFoodCart={handleFoodCart} cart={cart}></FoodContent>
+              <Footer></Footer>
+            </Route>
+            <Route path="/food/:foodId">
+              <Header cart={cart}></Header>
+              <FoodDetail cart={cart}></FoodDetail>
+            </Route>
+            <Route path="*">
+              <NotFound></NotFound>
+            </Route>
+          </Switch>
+        </Router>
+      </AuthContextProvider>
+    </div>
   );
 }
 
