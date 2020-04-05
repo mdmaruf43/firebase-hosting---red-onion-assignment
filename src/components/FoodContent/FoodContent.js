@@ -3,7 +3,6 @@ import './FoodContent.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import FoodItem from '../FoodItem/FoodItem';
-import fakeData from '../../demoData';
 import { Link } from 'react-router-dom'; 
 
 const FoodContent = (props) => {
@@ -11,8 +10,13 @@ const FoodContent = (props) => {
     const [selectedFoodType, setSelectedFoodType] = useState("lunch");
     const [cart, setCart] = useState([]);
     useEffect(() => {
-        setFoods(fakeData);
-        setCart(fakeData);
+        fetch('http://localhost:4000/products')
+        .then(res => res.json())
+        .then(data => {
+            setFoods(data);
+            setCart(data);
+        })
+        
     }, [])
     const selectedFoods =  foods.filter(food => food.category === selectedFoodType).slice(0, 6)
     return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import Auth from './UseAuth';
+import useAuth from './UseAuth';
 import { Link } from 'react-router-dom';
 import logo from '../../Images/ICON/logo2.png'
 import './Login.css';
@@ -9,7 +9,7 @@ import { useState } from 'react';
 const Login = () => {
     const [returningUser , setReturningUser] = useState(false);
     const { register, handleSubmit, watch, errors } = useForm();
-    const auth = Auth();
+    const auth = useAuth();
     const onSubmit = data => { 
         if(returningUser){
             if(data.email && data.password){
@@ -17,7 +17,7 @@ const Login = () => {
             }
         }else{
             if(data.name && data.email && data.password && data.confirm_password){
-                auth.createUser(data.email, data.confirm_password,data.name)
+                auth.createUser(data.email, data.confirm_password, data.name)
             }
         }
         
@@ -85,7 +85,6 @@ const Login = () => {
                 </form>
                 }
             </div>
-
         </div>
     );
 };

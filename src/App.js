@@ -8,29 +8,40 @@ import Login from './components/Login/Login';
 import Banner from './components/Banner/Banner';
 import Footer from './components/Footer/Footer';
 import FoodDetail from './components/FoodDetail/FoodDetail';
-import fakeData from './demoData';
 import { getDatabaseCart, addToDatabaseCart } from './utilities/databaseManager';
 import { AuthContextProvider } from './components/Login/UseAuth';
+import Inventory from './components/Inventory/Inventory';
+import Shipment from './components/Shipment/Shipment';
 
 function App() {
   const [cart , setCart] = useState([]);
   useEffect(() => {
-    const saveCart = getDatabaseCart();
-    const foodId = Object.keys(saveCart);
-    const cardFoods = foodId.map(id => {
-        const food = fakeData.find(fd => fd.id === id);
-        food.quantity = saveCart[id];
-        return food;
+    const saveCart = getDatabaseCart(); 
+    const foodKey = Object.keys(saveCart);
+    fetch('http://localhost:4000/products', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(foodKey)
     })
-    setCart(cardFoods);   
+    .then(res => res.json())
+    .then(data => {
+        const cardFoods = foodKey.map(key => {
+        const food = data.find(fd => fd.key === key);
+        food.quantity = saveCart[key];
+        return food;
+      })
+      setCart(cardFoods);   
+    })
   }, [])
   const handleFoodCart = (food) => {
-    const sameFood = cart.find(fd => fd.id === food.id);
+    const sameFood = cart.find(fd => fd.key === food.key);
     let count = 1, newCart;
     if(sameFood){
       count = sameFood.quantity + 1;
       sameFood.quantity = count;
-      const othersFood = cart.filter(fd => fd.id !== food.id);
+      const othersFood = cart.filter(fd => fd.key !== food.key);
       newCart = [...othersFood, sameFood];
     }
     else{
@@ -46,20 +57,28 @@ function App() {
         <Router>
           <Switch>
             <Route path="/login">
-              <Login></Login>
+              <Login/>
+            </Route>
+            <Route path="/shipment">
+              <Header cart={cart}></Header>
+              <Shipment/>
+            </Route>
+            <Route path="/inventory">
+                <Header cart={cart}/>
+                <Inventory/>
             </Route>
             <Route exact path="/">
               <Header cart={cart}></Header>
-              <Banner></Banner>
+              <Banner/>
               <FoodContent handleFoodCart={handleFoodCart} cart={cart}></FoodContent>
-              <Footer></Footer>
+              <Footer/>
             </Route>
-            <Route path="/food/:foodId">
+            <Route path="/food/:foodkey">
               <Header cart={cart}></Header>
               <FoodDetail cart={cart}></FoodDetail>
             </Route>
             <Route path="*">
-              <NotFound></NotFound>
+              <NotFound/>
             </Route>
           </Switch>
         </Router>

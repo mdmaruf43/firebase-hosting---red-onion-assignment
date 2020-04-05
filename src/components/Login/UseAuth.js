@@ -5,6 +5,7 @@ import firebaseConfig from '../../firebase.config';
 import { useState, createContext } from "react";
 import { useContext } from 'react';
 import { useEffect } from 'react';
+import { Route, Redirect } from "react-router-dom";
 
 firebase.initializeApp(firebaseConfig);
 
@@ -16,9 +17,25 @@ export const AuthContextProvider = (props) => {
 
 export const useAuth = () => useContext(AuthContext);
 
-const getUser = user => {
-    const {displayName, email} = user;
-    return {name: displayName, email: email}
+export const PrivateRoute = ({ children, ...rest }) => {
+    const auth = useAuth();
+    return (
+    <Route
+        {...rest}
+        render={({ location }) =>
+        auth.user ? (
+            children
+        ) : (
+            <Redirect
+            to={{
+                pathname: "/login",
+                state: { from: location }
+            }}
+            />
+        )
+        }
+    />
+    );
 }
 
 const Auth = () => {
@@ -27,12 +44,14 @@ const Auth = () => {
     const signInUser = (email, password) => {
         return firebase.auth().signInWithEmailAndPassword(email, password)
             .then(response => {
-                const currentUser = getUser(response.user);
-                setUser(currentUser);
-                return currentUser;
+                setUser(response.user);
+                window.history.back(); 
+                return response.user;
         })
         .catch(err => {
             console.log(err.message);
+            setUser(null);
+            return err.message;
         })
     };
 
@@ -40,7 +59,8 @@ const Auth = () => {
         return firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(res => {
             firebase.auth().currentUser.updateProfile({
-                displayName: name
+                displayName: name,
+                email: email
             }).then(() => {
                 setUser(res.user);
                 window.history.back(); 
@@ -50,18 +70,20 @@ const Auth = () => {
     }
 
     const signOut = () => {
-        return firebase.auth().signOut().then(() => {
+        return firebase.auth().signOut()
+        .then(() => {
             setUser(false);
-        });
+        })
     };
 
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged(user => {
             if (user) {
-            setUser(user);
-        } else {
-            setUser(false);
-        }
+                setUser(user);
+            } 
+            else {
+                setUser(false);
+            }
         });
     
         // Cleanup subscription on unmount
@@ -73,7 +95,7 @@ const Auth = () => {
         signInUser,
         createUser,
         signOut
-    }
+    };
 }
 
 export default Auth;

@@ -8,10 +8,9 @@ import { useAuth } from '../Login/UseAuth';
 
 const Header = (props) => {
     const auth = useAuth();
-    console.log(auth.user);
     return (
         <div className="container">
-            <nav className="navbar navbar-expand navbar-light bg-white fixed-top">
+            <nav className="navbar navbar-expand navbar-light bg-white">
                 <Link className="navbar-brand" to="/"><img src={logo} alt=""/></Link>
 
                 <div className="collapse navbar-collapse  d-flex justify-content-end" id="navbarNavAltMarkup">

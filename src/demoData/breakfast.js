@@ -1,6 +1,6 @@
 let breakfast = [
     {
-        "id": "B023XA",
+        "key": "B023XA",
         "category": "breakfast",
         "name": "Bagel and Cream Cheese",
         "title": "How yummy the breakfast is!",
@@ -10,7 +10,7 @@ let breakfast = [
         "img": "https://images.pexels.com/photos/2569760/pexels-photo-2569760.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
     },
     {
-        "id": "B023XB",
+        "key": "B023XB",
         "category": "breakfast",
         "name": "Breakfast Sandwich",
         "title": "How yummy the breakfast is!",
@@ -20,7 +20,7 @@ let breakfast = [
         "img": "https://images.pexels.com/photos/1027810/pexels-photo-1027810.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
     },
     {
-        "id": "B023XC",
+        "key": "B023XC",
         "category": "breakfast",
         "name": "Baked Chiken",
         "title": "How yummy the breakfast is!",
@@ -30,7 +30,7 @@ let breakfast = [
         "img": "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
     },
     {
-        "id": "B023XD",
+        "key": "B023XD",
         "category": "breakfast",
         "name": "Eggs Benedict",
         "title": "How yummy the breakfast is!",
@@ -40,7 +40,7 @@ let breakfast = [
         "img": "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
     },
     {
-        "id": "B023XE",
+        "key": "B023XE",
         "category": "breakfast",
         "name": "Toast Croissant Fried Egg",
         "title": "How yummy the breakfast is!",
@@ -50,7 +50,7 @@ let breakfast = [
         "img": 'https://images.pexels.com/photos/156114/pexels-photo-156114.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
     },
     {
-        "id": "B023XF",
+        "key": "B023XF",
         "category": "breakfast",
         "name": "Full Breakfast Fried Egg Toast Brunch",
         "title": "How yummy the breakfast is!",
@@ -60,7 +60,7 @@ let breakfast = [
         "img": "https://images.pexels.com/photos/1600711/pexels-photo-1600711.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
     },
     {
-        "id": "B023XG",
+        "key": "B023XG",
         "category": "breakfast",
         "name": "Breakfast Sandwich Big",
         "title": "How yummy the breakfast is!",
@@ -70,7 +70,7 @@ let breakfast = [
         "img": "https://images.pexels.com/photos/132694/pexels-photo-132694.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
     },
     {
-        "id": "B023XI",
+        "key": "B023XI",
         "category": "breakfast",
         "name": "Eggs Benedict 2",
         "title": "How yummy the breakfast is!",
