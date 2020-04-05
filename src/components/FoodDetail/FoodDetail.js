@@ -8,7 +8,7 @@ const FoodDetail = (props) => {
     const {foodkey} = useParams();
     const [foods, setFoods] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:4000/products')
+        fetch('https://glacial-woodland-72025.herokuapp.com/products')
         .then(res => res.json())
         .then(data => {
             const newFood = data.find(fd => fd.key === foodkey);

@@ -10,7 +10,7 @@ const FoodContent = (props) => {
     const [selectedFoodType, setSelectedFoodType] = useState("lunch");
     const [cart, setCart] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:4000/products')
+        fetch('https://glacial-woodland-72025.herokuapp.com/products')
         .then(res => res.json())
         .then(data => {
             setFoods(data);

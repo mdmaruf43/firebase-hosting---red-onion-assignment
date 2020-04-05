@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     const saveCart = getDatabaseCart(); 
     const foodKey = Object.keys(saveCart);
-    fetch('http://localhost:4000/products', {
+    fetch('https://glacial-woodland-72025.herokuapp.com/products', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
