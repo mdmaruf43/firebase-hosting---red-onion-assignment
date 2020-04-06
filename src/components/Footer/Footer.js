@@ -2,8 +2,9 @@ import React from 'react';
 import './Footer.css'
 import logo from '../../Images/ICON/logo2.png';
 const Footer = () => {
+
     return (
-        <div className="container">
+        <div className="container mt-5">
             <footer className="bg-dark py-3">
                 <div className="container">
                     <div className="row footer-top py-5">
@@ -27,7 +28,6 @@ const Footer = () => {
                             </ul>
                         </div>
                     </div>
-
                     <div className="footer-bottom d-flex justify-content-between align-items-center">
                         <small className="text-secondary">Copyright &copy;  2020 Online Food </small>
                         <ul className="list-inline">
@@ -35,7 +35,6 @@ const Footer = () => {
                             <li className="list-inline-item  ml-3"><a href="/">Terms of Use</a></li>
                             <li className="list-inline-item  ml-3"><a href="/">Pricing</a></li>
                         </ul>
-
                     </div>
                 </div>
             </footer>

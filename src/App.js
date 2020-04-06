@@ -12,10 +12,12 @@ import { getDatabaseCart, addToDatabaseCart } from './utilities/databaseManager'
 import { AuthContextProvider } from './components/Login/UseAuth';
 import Inventory from './components/Inventory/Inventory';
 import Shipment from './components/Shipment/Shipment';
+import Features from './components/Features/Features';
 
 function App() {
   const [cart , setCart] = useState([]);
   const [foods, setFoods] = useState([]);
+
   useEffect(() => {
     fetch('https://glacial-woodland-72025.herokuapp.com/products')
     .then(res => res.json())
@@ -23,6 +25,7 @@ function App() {
         setFoods(data);
     })
 }, [])
+
   useEffect(() => {
     const saveCart = getDatabaseCart(); 
     const foodProductKey = Object.keys(saveCart);
@@ -52,8 +55,9 @@ function App() {
     setCart(newCart);
     addToDatabaseCart(food.id, count);
   }
-  return (
-    <div>
+
+  return ( 
+    <div className="App">
       <AuthContextProvider>
         <Router>
           <Switch>
@@ -61,7 +65,7 @@ function App() {
               <Login/>
             </Route>
             <Route path="/shipment">
-              <Header cart={cart}></Header>
+              <Header cart={cart}/>
               <Shipment/>
             </Route>
             <Route path="/inventory">
@@ -69,14 +73,15 @@ function App() {
                 <Inventory/>
             </Route>
             <Route exact path="/">
-              <Header cart={cart}></Header>
+              <Header cart={cart}/>
               <Banner/>
-              <FoodContent handleFoodCart={handleFoodCart} cart={cart}></FoodContent>
+              <FoodContent handleFoodCart={handleFoodCart} cart={cart}/>
+              <Features/>
               <Footer/>
             </Route>
             <Route path="/food/:foodkey">
-              <Header cart={cart}></Header>
-              <FoodDetail cart={cart}></FoodDetail>
+              <Header cart={cart}/>
+              <FoodDetail cart={cart}/>
             </Route>
             <Route path="*">
               <NotFound/>

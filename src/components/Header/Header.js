@@ -9,10 +9,9 @@ import { useAuth } from '../Login/UseAuth';
 const Header = (props) => {
     const auth = useAuth();
     return (
-        <div className="container">
-            <nav className="navbar navbar-expand navbar-light bg-white">
+        <nav className="navbar navbar-expand navbar-light bg-white fixed-top">
+            <div className="container">
                 <Link className="navbar-brand" to="/"><img src={logo} alt=""/></Link>
-
                 <div className="collapse navbar-collapse  d-flex justify-content-end" id="navbarNavAltMarkup">
                     <ul className="navbar-nav align-items-center">
                         <li className="nav-item active">
@@ -40,8 +39,8 @@ const Header = (props) => {
                         </li>
                     </ul>
                 </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
     );
 };
 

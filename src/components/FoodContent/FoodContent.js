@@ -9,6 +9,7 @@ const FoodContent = (props) => {
     const [foods, setFoods] = useState([]);
     const [selectedFoodType, setSelectedFoodType] = useState("lunch");
     const [cart, setCart] = useState([]);
+    
     useEffect(() => {
         fetch('https://glacial-woodland-72025.herokuapp.com/products')
         .then(res => res.json())
@@ -18,7 +19,9 @@ const FoodContent = (props) => {
         })
         
     }, [])
-    const selectedFoods =  foods.filter(food => food.category === selectedFoodType).slice(0, 6)
+
+    const selectedFoods =  foods.filter(food => food.category === selectedFoodType).slice(0, 6);
+    
     return (
         <div className="container">
             <nav>
@@ -42,7 +45,7 @@ const FoodContent = (props) => {
             <div className="text-center">
                 {
                     props.cart.length ?
-                    <Link to="/">
+                    <Link to="/shipment">
                         <button  className="btn btn-danger btn-secondary">Check Out Your Food</button>
                     </Link>
                     :

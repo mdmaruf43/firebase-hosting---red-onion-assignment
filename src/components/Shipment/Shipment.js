@@ -42,10 +42,10 @@ const Shipment = () => {
     }
 
     return (
-        <div className="sign-up">
+        <div className="sign-up pt-5">
             <div className="container">
                 <div style={{display: shipInfo && 'none'}} >
-                    <h3 className="text-center">Shipment Information</h3>
+                    <h3 className="text-center pt-5">Shipment Information</h3>
                     <form onSubmit={handleSubmit(onSubmit)} className="py-5">
                         <div className="form-group">
                             <input name="name" className="form-control" defaul="true" ref={register({ required: true })} placeholder="Name" />
@@ -92,8 +92,8 @@ const Shipment = () => {
                     {
                         orderId && 
                         <div>
-                            <h3>Thank you for shopping with us</h3>
-                            <p>Your order is: {orderId}</p>
+                            <h3 className="text-center text-success">Thank you for shopping with us</h3>
+                            <p className="text-center text-success">Your order is: {orderId}</p>
                         </div>
                     }
                 </div>

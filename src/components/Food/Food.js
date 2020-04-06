@@ -8,15 +8,15 @@ const Food = (props) => {
     const {price, foodDescription, image, name} = props.food;
     const [quantity, setQuantity] = useState(1);
     const auth = useAuth();
+
     return (
-        <div className="my-5 container">
+        <div className="my-5 container pt-5">
             <div className="row">
                 <div className="col-md-6">
                     <h1>{name}</h1>
                     <p className="my-5">{foodDescription}</p>
                     <div className="d-flex  my-4">
                         <h2 className="price">{price}</h2>
-
                         <div className="cart-controller ml-3 btn"> 
                             <button className="btn" onClick={() => setQuantity(quantity <= 1 ? quantity : quantity - 1)}>-</button> {quantity} <button className="btn" onClick={() => setQuantity(quantity + 1)}>+</button>
                         </div>
@@ -33,7 +33,6 @@ const Food = (props) => {
                             <Link to="/login">
                                     <button className="btn btn-danger btn-rounded  ml-4"><FontAwesomeIcon icon={faShippingFast} /> Process To Shipment</button>
                             </Link>
-
                         }
                     </div>
                     <div className="more-images mt-5 ">
