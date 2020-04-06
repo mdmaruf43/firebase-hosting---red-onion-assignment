@@ -15,26 +15,27 @@ import Shipment from './components/Shipment/Shipment';
 
 function App() {
   const [cart , setCart] = useState([]);
+  const [foods, setFoods] = useState([]);
   useEffect(() => {
-    const saveCart = getDatabaseCart(); 
-    const foodKey = Object.keys(saveCart);
-    fetch('https://glacial-woodland-72025.herokuapp.com/products', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(foodKey)
-    })
+    fetch('https://glacial-woodland-72025.herokuapp.com/products')
     .then(res => res.json())
     .then(data => {
-        const cardFoods = foodKey.map(key => {
-        const food = data.find(fd => fd.key === key);
+        setFoods(data);
+    })
+}, [])
+  useEffect(() => {
+    const saveCart = getDatabaseCart(); 
+    const foodProductKey = Object.keys(saveCart);
+    if(foods.length){
+      const cardFoods = foodProductKey.map(key => {
+        const food = foods.find(fd => fd.key === key);
         food.quantity = saveCart[key];
         return food;
       })
-      setCart(cardFoods);   
-    })
+      setCart(cardFoods);
+    }
   }, [])
+
   const handleFoodCart = (food) => {
     const sameFood = cart.find(fd => fd.key === food.key);
     let count = 1, newCart;

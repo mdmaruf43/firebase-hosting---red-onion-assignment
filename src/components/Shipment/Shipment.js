@@ -26,7 +26,7 @@ const Shipment = () => {
             shipment: shipInfo,
             payment: payment
         };
-        fetch('http://localhost:4000/placeOrder', {
+        fetch('https://glacial-woodland-72025.herokuapp.com/placeOrder', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ const Shipment = () => {
                     </form>
                 </div>
                 <div style={{marginTop: '200px', display: shipInfo ? 'block' : 'none'}} className="justify-content-center" >
-                    <h3 className="text-center mt-2">Payment Information</h3>
+                    <h3 className="text-center mt-5">Payment Information</h3>
                     <Elements stripe={stripePromise}>
                         <CheckoutForm handlePlaceOrder={handlePlaceOrder}>
                         </CheckoutForm>
