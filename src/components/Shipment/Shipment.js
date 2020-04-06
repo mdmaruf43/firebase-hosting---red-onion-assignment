@@ -92,7 +92,7 @@ const Shipment = () => {
                     {
                         orderId && 
                         <div>
-                            <h3 className="text-center text-success">Thank you for shopping with us</h3>
+                            <h3 className="text-center">Thank you for shopping with us</h3>
                             <p className="text-center text-success">Your order is: {orderId}</p>
                         </div>
                     }
