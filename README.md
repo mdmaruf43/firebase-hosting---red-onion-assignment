@@ -1,4 +1,4 @@
-# Ema-John-Simple
+# Red Onion
 ### [Live Site](https://red-onion-simple-restaurant.web.app/) 
 This is a complete e-commerce MERN Stack project. Inspire from **Amazon**. I just try to make this website based on biggest e-commerce giant amazon with simple features.
 
