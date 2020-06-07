@@ -4,8 +4,8 @@ This is a complete e-commerce MERN Stack project. Inspire from **Amazon**. I jus
 
 # Features 
 - Full responsive e-commerce website 
-- Select product to add card 
-- Login with Google Or Manual 
+- Select product to add card
+- Login with Google Or Manual
 - Check order Review & History 
 - Add payment through Stripe 
 
@@ -18,4 +18,6 @@ This is a complete e-commerce MERN Stack project. Inspire from **Amazon**. I jus
 - Firebase Hosting
 - Stripe Payment
 - Express
-- MongoDB 
+- MongoDB
+
+**Backend Repo:** [Red Onion](https://github.com/mdmaruf43/red-onion-server)
